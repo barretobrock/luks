@@ -1,0 +1,13 @@
+[Unit]
+Description=Home Network Hostname & Key Retrieval API
+After=multi-user.target
+
+[Service]
+User=bobrock
+Group=bobrock
+Type=idle
+ExecStart=/home/bobrock/venvs/luks/bin/python3 /home/bobrock/extras/luks/run.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

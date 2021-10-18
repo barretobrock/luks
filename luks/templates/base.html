@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/png">
+    <!-- CSS -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- JS -->
+    <!-- Flash message timeout -->
+    <script type="text/javascript">
+        window.setTimeout("for (const elem of document.getElementsByClassName('alert')) {elem.style.display = 'none';}", 2000);
+    </script>
+    <!-- FontAwesome -->
+    <script src="https://use.fontawesome.com/9b3bd4052a.js"></script>
+    {% if title %}
+        <title>Grackle - {{ title }}</title>
+    {% else %}
+        <title>Grackle</title>
+    {% endif %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('main.index') }}">
+            <img class="nav-logo" src="{{ url_for('static', filename='images/favicon.svg') }}" alt="grackle logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                {% set nav_dict = [
+                    ('charts.overview', 'Overview'),
+                    ('finances.select_mvb', 'Month v Budget'),
+                    ('finances.select_mvm', 'Month v Month'),
+                    ('charts.budget_analysis', 'Budget Analysis'),
+                    ('main.upload_page', 'Upload')
+                ] -%}
+
+                {% for id, caption in nav_dict %}
+                    <li class="nav-item {{'active' if request.endpoint == id}}">
+                        <a class="nav-link" href="{{ url_for(id) }}">{{ caption }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+{#                {% if request.endpoint in ['posts.blog', 'posts.post'] %}#}
+{#                    <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}">New Post</a>#}
+{#                {% endif %}#}
+                <a class="nav-item nav-link" href="{{ url_for('finances.get_invoices') }}">Invoices</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert {{ category }}"> {{ message|capitalize }} </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Here's where the main content gets piped in! -->
+        {% block content %} {% endblock %}
+    </div>
+  </body>
+  <footer class="footer">
+      <div class="navbar fixed-bottom">
+          <span class="text-muted">GNUCash file last updated: {{ config.GNU_LAST_UPDATE.strftime('%F %T') if config.GNU_LAST_UPDATE is not none else '?' }}</span>
+      </div>
+  </footer>
+</html>

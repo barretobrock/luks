@@ -1,0 +1,7 @@
+easylogger @ git+https://github.com/barretobrock/easylogger@main#egg=easylogger
+Flask>=1.1.2
+flask-wtf
+kavalkilu @ git+https://github.com/barretobrock/kavalkilu@master#egg=kavalkilu
+pykeepass
+requests>=2.25.1
+versioneer

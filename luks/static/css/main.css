@@ -1,0 +1,17 @@
+/* main page */
+body {
+    padding-bottom: 70px;
+}
+.nav-logo {
+    width: 25px;
+}
+
+.nav-item.active > a {
+    color: #ffdb00 !important;
+}
+
+/* footer */
+footer .container {
+    width: 100%;
+    line-height: 60px;
+}
