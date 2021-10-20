@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#keys-table').DataTable({
+                "pageLength": 100,
+                "order": [[1, 'desc']]
+            });
+        });
+    </script>
+    <div>
+        <table id="keys-table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in keys_list %}
+                <tr>
+                    <td>{{ entry['title'] }}</td>
+                    <td>{{ entry['updated'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td>Total: {{ keys_list|length }} </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

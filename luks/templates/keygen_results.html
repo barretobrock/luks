@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.extend( $.fn.dataTable.defaults, {
+                searching: false
+            } );
+            $('#keygen-results').DataTable({
+                "pageLength": 100,
+                "order": [[1, 'desc']]
+            });
+            $('.secret-entry').each(function(index) {
+                $(this).on('click', function () {
+                    let copyText = this.innerText;
+
+                    navigator.clipboard.writeText(copyText);
+                    let orig_color = this.style.backgroundColor;
+                    console.log('Setting bg color..');
+                    this.style.backgroundColor = '#00AF71FF';
+                    setTimeout(function () {
+                        console.log('Waiting..');
+                        console.log('Returning bg color to original state..');
+                        this.style.backgroundColor = orig_color;
+                    }.bind(this), 300)
+                })
+            })
+        });
+    </script>
+    <div >
+        <table id="keygen-results" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Len</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in phrase_list %}
+                <tr>
+                    <td class="secret-entry">{{ entry }}</td>
+                    <td>{{ entry|length }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td>Total: {{ phrase_list|length }} </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="form-wrapper">
+        <h2 class="title">New Key Generator</h2>
+        <form method="POST" action="{{ url_for('keys.generate_keys') }}">
+            <fieldset class="form-field">
+                {{ form.n_phrases.label }}
+                {{ form.n_phrases }}
+                {% if form.n_phrases.errors %}
+                    <ul class="errors">
+                      {% for error in form.n_phrases.errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                {% endif %}
+            </fieldset>
+             <fieldset class="form-field">
+                {{ form.n_words.label }}
+                {{ form.n_words }}
+                {% if form.n_words.errors %}
+                    <ul class="errors">
+                      {% for error in form.n_words.errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                {% endif %}
+            </fieldset>
+            <fieldset class="form-field">
+                {{ form.char_limit.label }}
+                {{ form.char_limit }}
+                {% if form.char_limit.errors %}
+                    <ul class="errors">
+                      {% for error in form.char_limit.errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                {% endif %}
+            </fieldset>
+            <fieldset class="form-field">
+                {{ form.joiner_char.label }}
+                {{ form.joiner_char }}
+                {% if form.joiner_char.errors %}
+                    <ul class="errors">
+                      {% for error in form.joiner_char.errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                {% endif %}
+            </fieldset>
+            <fieldset class="form-field">
+                {{ form.symbols.label }}
+                {{ form.symbols }}
+                {% if form.symbols.errors %}
+                    <ul class="errors">
+                      {% for error in form.symbols.errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                {% endif %}
+            </fieldset>
+            {{ form.submit }}
+        </form>
+    </div>
+{% endblock %}

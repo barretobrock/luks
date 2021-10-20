@@ -17,15 +17,15 @@
     <!-- FontAwesome -->
     <script src="https://use.fontawesome.com/9b3bd4052a.js"></script>
     {% if title %}
-        <title>Grackle - {{ title }}</title>
+        <title>Luks - {{ title }}</title>
     {% else %}
-        <title>Grackle</title>
+        <title>Luks</title>
     {% endif %}
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url_for('main.index') }}">
-            <img class="nav-logo" src="{{ url_for('static', filename='images/favicon.svg') }}" alt="grackle logo">
+        <a class="navbar-brand" href="{{ url_for('main.main_page') }}">
+            <img class="nav-logo" src="{{ url_for('static', filename='images/favicon.svg') }}" alt="luks logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,11 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 {% set nav_dict = [
-                    ('charts.overview', 'Overview'),
-                    ('finances.select_mvb', 'Month v Budget'),
-                    ('finances.select_mvm', 'Month v Month'),
-                    ('charts.budget_analysis', 'Budget Analysis'),
-                    ('main.upload_page', 'Upload')
+                    ('hosts.all_hosts', 'Hosts'),
+                    ('hosts.reload_hosts', 'Reload Hosts'),
+                    ('keys.all_keys', 'Keys'),
+                    ('keys.reload_keys', 'Reload Keys')
                 ] -%}
 
                 {% for id, caption in nav_dict %}
@@ -48,10 +47,7 @@
             </ul>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-{#                {% if request.endpoint in ['posts.blog', 'posts.post'] %}#}
-{#                    <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}">New Post</a>#}
-{#                {% endif %}#}
-                <a class="nav-item nav-link" href="{{ url_for('finances.get_invoices') }}">Invoices</a>
+                <a class="nav-item nav-link" href="{{ url_for('keys.generate_keys') }}">KeyGen</a>
             </div>
         </div>
     </nav>
@@ -70,7 +66,7 @@
   </body>
   <footer class="footer">
       <div class="navbar fixed-bottom">
-          <span class="text-muted">GNUCash file last updated: {{ config.GNU_LAST_UPDATE.strftime('%F %T') if config.GNU_LAST_UPDATE is not none else '?' }}</span>
+          <span class="text-muted">Something here?</span>
       </div>
   </footer>
 </html>

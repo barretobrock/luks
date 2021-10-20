@@ -10,7 +10,7 @@ PROPS_PATH = KEY_DIR.joinpath('SECRETPROP')
 PROPS_DB_PATH = KEY_DIR.joinpath('secretprops.kdbx')
 
 
-def get_secret_file(fpath: pathlib.PosixPath) -> str:
+def get_secret_file(fpath: pathlib.PosixPath = PROPS_PATH) -> str:
     """Grabs a file containing a 'metasecret' (secret for obtaining secrets)"""
     if not fpath.exists():
         raise FileNotFoundError(f'File at \'{fpath}\' does not exist.')
@@ -18,7 +18,7 @@ def get_secret_file(fpath: pathlib.PosixPath) -> str:
         return f.read().strip()
 
 
-def read_props(fpath: pathlib.PosixPath = PROPS_PATH) -> Dict[str, str]:
+def read_props(fpath: pathlib.PosixPath) -> Dict[str, str]:
     props = {}
     with fpath.open('r') as f:
         contents = f.read().split('\n')

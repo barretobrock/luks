@@ -11,7 +11,7 @@ class BaseConfig(object):
     path = pathlib.Path
     PORT = 5006
     # Stuff for frontend
-    STATIC_DIR_PATH = '../build'
+    STATIC_DIR_PATH = '../static'
     TEMPLATE_DIR_PATH = '../templates'
     # backend
     DATA_DIR = path.home().joinpath('data')

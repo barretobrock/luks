@@ -1,12 +1,15 @@
-from flask import Blueprint
+from flask import (
+    Blueprint,
+    render_template
+)
 
 
 main = Blueprint('main', __name__)
 
 
-@main.route('/')
+@main.route('/', methods=['GET'])
 def main_page():
-    return 'Main page!'
+    return render_template('index.html')
 
 
 @main.errorhandler(500)

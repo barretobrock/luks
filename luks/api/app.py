@@ -12,7 +12,7 @@ def create_app(*args, **kwargs) -> Flask:
     config_class = kwargs.pop('config_class', ProductionConfig)
     app = Flask(__name__, static_folder=config_class.STATIC_DIR_PATH, static_url_path='/',
                 template_folder=config_class.TEMPLATE_DIR_PATH)
-    app.logger = Log('grackle.app', log_level_str=config_class.LOG_LEVEL)
+    app.logger = Log('luks.app', log_level_str=config_class.LOG_LEVEL)
     app.config.from_object(config_class)
     # Register routes
     for rt in [hosts, keys, main]:

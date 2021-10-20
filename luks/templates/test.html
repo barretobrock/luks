@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="form-wrapper">
+        <h2 class="title">New Key Generator</h2>
+        <form method="POST" action="{{ url_for('main.do_test') }}">
+            <fieldset class="form-field">
+                {{ form.n_phrases.label }}
+                {{ form.n_phrases }}
+                {% if form.n_phrases.errors %}
+                    <ul class="errors">
+                      {% for error in form.n_phrases.errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                {% endif %}
+            </fieldset>
+            {{ form.submit }}
+        </form>
+    </div>
+{% endblock %}
