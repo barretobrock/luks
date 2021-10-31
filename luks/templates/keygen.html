@@ -3,7 +3,7 @@
 {% block content %}
     <div class="form-wrapper">
         <h2 class="title">New Key Generator</h2>
-        <form method="POST" action="{{ url_for('keys.generate_keys') }}">
+        <form method="POST" action="{{ url_for('keys.generate_keys') }}" class="keygen-form">
             <fieldset class="form-field">
                 {{ form.n_phrases.label }}
                 {{ form.n_phrases }}

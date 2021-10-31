@@ -67,10 +67,11 @@ def get_key(key_name: str):
             if isinstance(att.data, bytes):
                 # Decode to string, try loading as json
                 resp[att.filename] = json.loads(att.data.decode('utf-8'))
-    return jsonify({'data': [resp]})
+    if is_api_request(request):
+        return jsonify({'data': [resp]})
+    return render_template('key_detail.html', key_dict=resp)
 
 
-@keys.route('/api/keys/keygen', methods=['GET', 'POST'])
 @keys.route('/keys/keygen', methods=['GET', 'POST'])
 def generate_keys():
     if request.method == 'POST':

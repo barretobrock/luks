@@ -3,6 +3,7 @@ from flask import (
     redirect,
     request,
     jsonify,
+    make_response,
     render_template
 )
 from luks.hosts import ServerHosts
@@ -20,6 +21,8 @@ def is_api_request(req: request) -> bool:
 @hosts.route('/hosts/reload', methods=['GET'])
 def reload_hosts():
     host_svc.reload()
+    if is_api_request(request):
+        return make_response('', 200)
     return redirect('/hosts')
 
 
@@ -38,10 +41,11 @@ def get_host():
     """Simple GET all hosts with static IPs"""
     host_name = request.args.get('name', default=None, type=str)
     ip = request.args.get('ip', default=None, type=str)
-    result = []
+    hosts_list = []
     if host_name is not None:
-        result.append(host_svc.get_ip(host_name))
+        hosts_list.append(host_svc.get_ip(host_name))
     elif ip is not None:
-        result.append(host_svc.get_host(ip))
-
-    return jsonify({'data': result})
+        hosts_list.append(host_svc.get_host(ip))
+    if is_api_request(request):
+        return jsonify({'data': hosts_list})
+    return render_template('hosts_table.html', hosts_list=hosts_list)

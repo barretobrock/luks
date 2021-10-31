@@ -23,3 +23,16 @@ footer .container {
     background-color: rgba(127, 255, 212, 0.63);
     cursor: copy;
 }
+
+/* Keygen Form */
+form.keygen-form {
+    display: grid;
+    grid-template-columns: max-content;
+    grid-gap: 5px;
+}
+.keygen-form fieldset {
+    text-align: right;
+}
+.keygen-form label:after {
+    content: ':';
+}
