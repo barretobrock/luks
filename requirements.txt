@@ -1,4 +1,4 @@
-diceware @ git+https://github.com/barretobrock/diceware-ee@master#egg=diceware-ee
+diceware @ git+https://github.com/barretobrock/diceware-ee/archive/master.zip
 easylogger @ git+https://github.com/barretobrock/easylogger@main#egg=easylogger
 Flask>=1.1.2
 flask-wtf
