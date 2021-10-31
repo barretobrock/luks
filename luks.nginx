@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name {ip} {name} {name}.local;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/home/bobrock/extras/luks/luks.sock;
+    }
+}

@@ -5,6 +5,30 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
     <script>
+        function copyToClipboard(copyText) {
+            // Tries to copy to clipboard using nagivator.clipboard (only works over secure context like HTTPS),
+            //  otherwise uses other means
+            if (navigator.clipboard && window.isSecureContext) {
+                // navigator clipboard api method
+                return navigator.clipboard.writeText(copyText);
+            } else {
+                // otherwise we'll use a text area method
+                let textArea = document.createElement('textarea');
+                textArea.value = copyText;
+                // make textarea out of viewport
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.append(textArea);
+                textArea.select();
+                return new Promise((res, rej) => {
+                    document.execCommand('copy') ? res() : rej();
+                    textArea.remove();
+                });
+            }
+        }
+    </script>
+    <script>
         $(document).ready(function () {
             $.extend( $.fn.dataTable.defaults, {
                 searching: false
@@ -16,8 +40,9 @@
             $('.secret-entry').each(function(index) {
                 $(this).on('click', function () {
                     let copyText = this.innerText;
-
-                    navigator.clipboard.writeText(copyText);
+                    copyToClipboard(copyText)
+                        .then(() => console.log('Copied text.'))
+                        .catch(() => console.log('Error when attempting to copy text.'))
                     let orig_color = this.style.backgroundColor;
                     console.log('Setting bg color..');
                     this.style.backgroundColor = '#00AF71FF';
