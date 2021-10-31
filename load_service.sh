@@ -3,7 +3,7 @@
 
 SERVICEFILE=luks.service
 API_FPATH=~/extras/luks/${SERVICEFILE}
-LIB_FPATH=/lib/systemd/system/${SERVICEFILE}
+LIB_FPATH=/etc/systemd/system/${SERVICEFILE}
 
 # Copy the service file to lib
 sudo cp ${API_FPATH} ${LIB_FPATH}
