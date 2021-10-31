@@ -11,7 +11,7 @@ MAIN_BRANCH = 'main'      # The primary branch of the repo
 DESC = 'Local key service'
 # Dependencies this package has on any of my other projects.
 #   This text gets appended to the placeholder in GIT_DEP_URL below
-MY_DEPS = ['kavalkilu', 'easylogger']
+MY_DEPS = ['diceware-ee', 'kavalkilu', 'easylogger']
 
 # ==============================================================================
 # These are things that probably won't need to be changed much.
