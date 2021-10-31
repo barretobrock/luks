@@ -1,13 +1,13 @@
 [Unit]
 Description=Home Network Hostname & Key Retrieval API
-After=multi-user.target
+After=network.target
 
 [Service]
 User=bobrock
-Group=bobrock
-Type=idle
-ExecStart=/home/bobrock/venvs/luks/bin/python3 /home/bobrock/extras/luks/run.py
-Restart=on-failure
+Group=www-data
+WorkingDirectory=/home/bobrock/extras/luks
+Environment="PATH=/home/bobrock/venvs/luks/bin"
+ExecStart=/home/bobrock/venvs/luks/bin/uwsgi --ini luks.ini
 
 [Install]
 WantedBy=multi-user.target
