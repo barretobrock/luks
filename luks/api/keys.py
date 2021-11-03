@@ -1,6 +1,5 @@
 import json
 import pathlib
-
 from flask import (
     Blueprint,
     redirect,
@@ -10,7 +9,11 @@ from flask import (
     render_template
 )
 from diceware import generate_phrase
-from luks.secrets import Secrets, get_secret_file, Entry
+from luks.secrets import (
+    Secrets,
+    get_secret_file,
+    Entry
+)
 from luks.forms import KeyGenForm
 
 

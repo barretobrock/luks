@@ -34,4 +34,4 @@ class ProductionConfig(BaseConfig):
     """Configuration for production environment"""
     DEBUG = False
     DB_SERVER = '0.0.0.0'
-    LOG_LEVEL = 'INFO'
+    LOG_LEVEL = 'DEBUG'
