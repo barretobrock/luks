@@ -6,7 +6,7 @@ from luks import ProductionConfig
 from luks.api import create_app
 
 
-log = LogWithInflux('luks-wsgi')
+log = LogWithInflux('luks-wsgi', log_to_db=False)
 app = create_app(config_class=ProductionConfig)
 
 
