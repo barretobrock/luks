@@ -1,5 +1,4 @@
 from flask import Flask
-from easylogger import Log
 from luks import ProductionConfig
 from .hosts import hosts
 from .keys import keys

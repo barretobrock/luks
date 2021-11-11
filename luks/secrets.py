@@ -1,6 +1,6 @@
 import pathlib
 from typing import Dict
-from pykeepass import PyKeePass
+import pykeepass
 from pykeepass.entry import Entry
 
 
@@ -37,7 +37,7 @@ class Secrets:
         self.load_database(password)
 
     def load_database(self, password: str):
-        self.db = PyKeePass(self.db_path, password=password)
+        self.db = pykeepass.PyKeePass(self.db_path, password=password)
 
     def get_entry(self, entry_name: str) -> Entry:
         return self.db.find_entries(title=entry_name, first=True)

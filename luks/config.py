@@ -35,3 +35,12 @@ class ProductionConfig(BaseConfig):
     DEBUG = False
     DB_SERVER = '0.0.0.0'
     LOG_LEVEL = 'DEBUG'
+
+
+class TestConfig(BaseConfig):
+    """Configuration for development environment"""
+    DEBUG = False
+    TESTING = True
+    WTF_CSRF_ENABLED = False
+    DB_SERVER = 'localhost'
+    LOG_LEVEL = 'DEBUG'

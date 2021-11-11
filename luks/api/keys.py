@@ -72,7 +72,8 @@ def get_key(key_name: str):
                 resp[att.filename] = json.loads(att.data.decode('utf-8'))
     if is_api_request(request):
         return jsonify({'data': [resp]})
-    return render_template('key_detail.html', key_dict=resp)
+    secret_dict = {key_name: resp}
+    return render_template('key_detail.html', key_dict=secret_dict)
 
 
 @keys.route('/keys/keygen', methods=['GET', 'POST'])

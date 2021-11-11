@@ -1,9 +1,9 @@
+import re
 import enum
 from typing import (
     List,
     Dict
 )
-from kavalkilu import HOME_SERVER_HOSTNAME
 
 
 class HostnameNotFoundException(Exception):
@@ -28,16 +28,6 @@ class MachineType(enum.Enum):
 class ServerHosts:
     """Everything associated with the Hosts API"""
     def __init__(self):
-        # Definitions of the prefixes stored in the hostnames
-        self.prefix_dict = {
-            HOME_SERVER_HOSTNAME: 'server',
-            'lt': 'laptop',
-            'pi': 'raspberry pi',
-            'ac': 'camera',
-            're': 'camera',
-            'an': 'mobile',
-            'ot': 'misc'
-        }
         self.all_hosts = []
         # Populate the hosts list for the first time
         self.read_hosts()
@@ -53,6 +43,10 @@ class ServerHosts:
             return MachineType.desktop
         elif prefix == 'ot':
             return MachineType.peripheral
+        elif prefix == 'pi':
+            return MachineType.raspi
+        elif prefix == 'an':
+            return MachineType.mobile
         elif 'serv' in name:
             return MachineType.server
         else:
@@ -62,7 +56,7 @@ class ServerHosts:
         """Reads in /etc/hosts, parses data"""
         with open('/etc/hosts', 'r') as f:
             hostlines = f.readlines()
-        hostlines = [line.strip().split(' ') for line in hostlines if line.startswith('192.168')]
+        hostlines = [re.split(r'\s+', line.strip()) for line in hostlines if line.startswith('192.168')]
         hosts = []
         for ip, name in hostlines:
             mach_type = self._map_name_to_machine_type(name)
