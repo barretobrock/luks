@@ -25,6 +25,10 @@ footer .container {
 }
 
 /* Keygen Form */
+.form-wrapper h2 {
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
 form.keygen-form {
     display: grid;
     grid-template-columns: max-content;
@@ -35,4 +39,40 @@ form.keygen-form {
 }
 .keygen-form label:after {
     content: ':';
+}
+.form-field label {
+    color: #797979
+}
+.form-field input {
+    border: 1px solid #c6c6c6 !important;
+    border-radius: 5px;
+}
+#submit {
+    border: none;
+    border-radius: 5px;
+    background-color: #1983cc;
+    color: #e3e3e3;
+}
+
+/* key detail */
+
+.key-title {
+    padding-top: 15px;
+}
+
+.key-title,
+.key-attr-title {
+    font-weight: bold;
+}
+.key-detail-table td {
+    padding-right: 10px;
+}
+.key-attr-title:after {
+    content: ':';
+}
+.key-detail-table {
+    width: 100%;
+}
+.key-detail-table tr {
+    border-bottom: 1px dotted #797979;
 }

@@ -23,7 +23,7 @@
             <tbody>
                 {% for entry in keys_list %}
                 <tr>
-                    <td>{{ entry['title'] }}</td>
+                    <td><a href="/key/{{ entry['title'] }}">{{ entry['title'] }}</a></td>
                     <td>{{ entry['updated'] }}</td>
                 </tr>
                 {% endfor %}

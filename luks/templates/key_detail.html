@@ -3,11 +3,11 @@
 {% block content %}
     <div>
         {% for name, secret_dict in key_dict.items() %}
-            <h4>{{ name }}</h4>
-            <table>
+            <h4 class="key-title">{{ name }}</h4>
+            <table class="key-detail-table">
                 {% for k, v in secret_dict.items() %}
                     <tr>
-                        <td>{{ k }}</td>
+                        <td class="key-attr-title">{{ k }}</td>
                         <td>{{ v }}</td>
                     </tr>
                 {% endfor %}
