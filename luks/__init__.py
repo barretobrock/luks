@@ -1,8 +1,3 @@
-from .config import (
-    DevelopmentConfig,
-    ProductionConfig,
-    TestConfig,
-    BaseConfig
-)
-from . import _version
-__version__ = _version.get_versions()['version']
+
+__version__ = '0.3.0'
+__update_date__ = '2022-04-29_13:11:22'

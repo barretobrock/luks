@@ -1,6 +1,7 @@
 from flask import (
     Blueprint,
     redirect,
+    Request,
     request,
     jsonify,
     make_response,
@@ -13,7 +14,7 @@ hosts = Blueprint('hosts', __name__)
 host_svc = ServerHosts()
 
 
-def is_api_request(req: request) -> bool:
+def is_api_request(req: Request) -> bool:
     return req.path.startswith('/api/')
 
 

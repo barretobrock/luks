@@ -1,5 +1,5 @@
 from flask import Flask
-from luks import ProductionConfig
+from luks.config import ProductionConfig
 from .hosts import hosts
 from .keys import keys
 from .main import main

@@ -1,14 +1,26 @@
 """Configuration setup"""
 import pathlib
-from ._version import get_versions
+from luks import (
+    __update_date__,
+    __version__
+)
+
+
+def get_local_secret_key(path: pathlib.Path) -> str:
+    """Grabs a locally-stored secret"""
+    if not path.exists():
+        raise FileNotFoundError(f'The luks secret key was not found at path: {path}')
+    with path.open() as f:
+        return f.read().strip()
 
 
 class BaseConfig(object):
     """Configuration items common across all config types"""
-    _v = get_versions()
-    VERSION = _v['version']
-    UPDATE_DATE = _v['date']
-    path = pathlib.Path
+    DEBUG = False
+    TESTING = False
+    VERSION = __version__
+    UPDATE_DATE = __update_date__
+    path = pathlib.Path()
     PORT = 5006
     # Stuff for frontend
     STATIC_DIR_PATH = '../static'
@@ -17,10 +29,7 @@ class BaseConfig(object):
     DATA_DIR = path.home().joinpath('data')
     KEY_DIR = path.home().joinpath('keys')
     SECRET_KEY_PATH = KEY_DIR.joinpath('luks-secret')
-    if not SECRET_KEY_PATH.exists():
-        raise FileNotFoundError(f'luks-secret at {SECRET_KEY_PATH} not found...')
-    with SECRET_KEY_PATH.open() as f:
-        SECRET_KEY = f.read().strip()
+    SECRET_KEY = get_local_secret_key(SECRET_KEY_PATH)
 
 
 class DevelopmentConfig(BaseConfig):

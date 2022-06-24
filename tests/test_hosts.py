@@ -3,7 +3,7 @@ from unittest.mock import (
     patch,
     mock_open
 )
-from easylogger import Log
+from loguru import logger
 from luks.hosts import (
     ServerHosts,
     HostnameNotFoundException,
@@ -16,7 +16,7 @@ class TestHosts(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.log = Log('test-hosts')
+        cls.log = logger
 
     def test_read_hosts(self):
         with patch('builtins.open', mock_open(read_data=mock_etc_hosts)):

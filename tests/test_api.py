@@ -1,11 +1,12 @@
 import unittest
 from unittest.mock import (
     patch,
-    mock_open
+    mock_open,
+    MagicMock
 )
-from luks import TestConfig
-import luks.api as lapi
-from .mocks.mock_hosts import mock_etc_hosts
+from loguru import logger
+from tests.common import make_patcher
+from tests.mocks.mock_hosts import mock_etc_hosts
 
 
 class TestAPI(unittest.TestCase):
@@ -13,9 +14,11 @@ class TestAPI(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        with patch('builtins.open', mock_open(read_data=mock_etc_hosts)):
-            app = lapi.create_app(config_class=TestConfig)
-            cls.app = app.test_client()
+        cls.log = logger
+
+    def setUp(self) -> None:
+        self.mock_secret_key = make_patcher(self, 'luks.config.get_local_secret_key')
+        self.mock_secret_key.return_value = 'lolthisisasecret3'
 
     def test_home_page(self):
         resp = self.app.get('/', follow_redirects=True)

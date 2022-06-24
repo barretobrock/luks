@@ -4,6 +4,7 @@ from flask import (
     Blueprint,
     redirect,
     request,
+    Request,
     make_response,
     jsonify,
     render_template
@@ -24,7 +25,7 @@ password = get_secret_file()
 secrets = Secrets(password)
 
 
-def is_api_request(req: request) -> bool:
+def is_api_request(req: Request) -> bool:
     return req.path.startswith('/api/')
 
 
