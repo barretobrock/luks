@@ -1,8 +1,8 @@
 from flask import Flask
 from luks.config import ProductionConfig
-from .hosts import hosts
-from .keys import keys
-from .main import main
+from luks.api.hosts import hosts
+from luks.api.keys import keys
+from luks.api.main import main
 
 
 def create_app(*args, **kwargs) -> Flask:
