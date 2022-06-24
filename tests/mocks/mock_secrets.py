@@ -1,23 +1,19 @@
-from unittest.mock import (
-    patch,
-    mock_open
+from datetime import (
+    datetime,
+    timedelta
 )
+from random import randint
 from typing import (
     Dict,
-    List,
     Union
 )
-from pykeepass.entry import Entry
 
 
-class MockEntry(Entry):
-    def __init__(self, title: str, un: str = None, pw: str = None, custom_props: Dict = None,
-                 files: Dict[str, Union[str, bytes]] = None):
-        super().__init__(title=title, username=un, password=pw)
-        if custom_props is not None:
-            for k, v in custom_props.items():
-                self.set_custom_property(k, v)
-        if files is not None:
-            for k, v in files.items():
-                with patch('builtins.open', mock_open(read_data=v)):
-                    self.add_attachment(id=k, filename=f'/tmp/{k}')
+class MockEntry:
+    def __init__(self, title: str, un: str = None, pw: str = None, custom_props: Dict = None):
+        self.title = title
+        self.username = un
+        self.password = pw
+        self.custom_properties = custom_props
+        self.attachments = []
+        self.mtime = (datetime.now() - timedelta(seconds=randint(50, 50000)))

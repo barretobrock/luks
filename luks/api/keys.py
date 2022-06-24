@@ -20,9 +20,9 @@ from luks.forms import KeyGenForm
 
 keys = Blueprint('keys', __name__)
 
-# Get password for secrets database
-password = get_secret_file()
-secrets = Secrets(password)
+
+def get_secrets() -> Secrets:
+    return Secrets(get_secret_file())
 
 
 def is_api_request(req: Request) -> bool:
@@ -32,6 +32,7 @@ def is_api_request(req: Request) -> bool:
 @keys.route('/api/keys', methods=['GET'])
 @keys.route('/keys', methods=['GET'])
 def all_keys():
+    secrets = get_secrets()
     x: Entry
     keys_list = [{
         'title': x.title,
@@ -45,7 +46,8 @@ def all_keys():
 @keys.route('/api/keys/reload', methods=['GET'])
 @keys.route('/keys/reload', methods=['GET'])
 def reload_keys():
-    secrets.load_database(password)
+    secrets = get_secrets()
+    secrets.load_database(get_secret_file())
     if is_api_request(request):
         return make_response('', 200)
     return redirect('/keys')
@@ -54,6 +56,7 @@ def reload_keys():
 @keys.route('/api/key/<key_name>', methods=['GET'])
 @keys.route('/key/<key_name>', methods=['GET'])
 def get_key(key_name: str):
+    secrets = get_secrets()
     entry = secrets.get_entry(key_name)
     if entry is None:
         return {}
