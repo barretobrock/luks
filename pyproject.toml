@@ -17,6 +17,7 @@ include = ["CHANGELOG.md"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+gunicorn = "^20.1.0"
 diceware = {git = "https://github.com/barretobrock/diceware-ee.git"}
 pukr = { git = "https://github.com/barretobrock/pukr.git", branch = "main" }
 Flask = "^2.1.2"
