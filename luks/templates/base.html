@@ -34,9 +34,7 @@
             <ul class="navbar-nav mr-auto">
                 {% set nav_dict = [
                     ('hosts.all_hosts', 'Hosts'),
-                    ('hosts.reload_hosts', 'Reload Hosts'),
                     ('keys.all_keys', 'Keys'),
-                    ('keys.reload_keys', 'Reload Keys')
                 ] -%}
 
                 {% for id, caption in nav_dict %}
@@ -47,7 +45,7 @@
             </ul>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{{ url_for('keys.generate_keys') }}">KeyGen</a>
+                <a class="btn btn-primary btn-sm" role="button" aria-pressed="true" href="{{ url_for('keys.generate_keys') }}">KeyGen</a>
             </div>
         </div>
     </nav>

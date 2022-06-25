@@ -40,7 +40,20 @@ def all_keys():
     } for x in secrets.db.entries if not x.title.startswith('hidden-')]
     if is_api_request(request):
         return jsonify({'data': keys_list})
-    return render_template('keys_table.html', keys_list=keys_list)
+    return render_template('render_datatable.html',
+                           tbl_id_name='keys-table',
+                           order_list=[1, "desc"],
+                           header_maps={
+                               'Name': {
+                                   'col': 'title',
+                                   'path': '/key/%s',
+                                },
+                               'Last Update': {
+                                   'col': 'updated'
+                               },
+                           },
+                           reload_endpoint='keys.reload_keys',
+                           results_list=keys_list)
 
 
 @keys.route('/api/keys/reload', methods=['GET'])
@@ -95,7 +108,22 @@ def generate_keys():
             joiner=form.get('joiner_char', '-'),
             symbols=form.get('symbols', '!@#$%_^&*')
         )
-        return render_template('keygen_results.html', phrase_list=phrases)
+        phrases = [{'val': x, 'len': len(x)} for x in phrases]
+        return render_template(
+            'render_datatable.html',
+            tbl_id_name='keygen-results',
+            order_list=[1, "desc"],
+            header_maps={
+                'Result': {
+                    'col': 'val',
+                    'copyable': True
+                },
+                'Len': {
+                    'col': 'len'
+                }
+            },
+            results_list=phrases
+        )
     else:
         # Render form to filter results
         form = KeyGenForm()

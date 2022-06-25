@@ -15,6 +15,15 @@ _Note: 'Unreleased' section below is used for untagged changes that will be issu
 #### Security
 __BEGIN-CHANGELOG__
  
+### [0.3.1] - 2022-06-24
+#### Added
+ - Darkmode style
+#### Changed
+ - Reload buttons moved out of main nav menu to pages
+ - Shared methods for table rendering / copying data
+#### Removed
+ - Individual table templates
+ 
 ### [0.3.0] - 2022-04-29
 #### Added
  - CHANGELOG

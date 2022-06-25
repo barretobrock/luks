@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "luks"
-version = '0.3.0'
+version = '0.3.1'
 description = "Local key generation webapp"
 authors = ["bobrock <bobrock@tuta.io>"]
 license = "MIT"
