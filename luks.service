@@ -4,10 +4,11 @@ After=network.target
 
 [Service]
 User=bobrock
-Group=www-data
+Group=bobrock
 WorkingDirectory=/home/bobrock/extras/luks
 Environment="PATH=/home/bobrock/venvs/luks/bin"
-ExecStart=/home/bobrock/venvs/luks/bin/uwsgi --ini luks.ini
+ExecStart=/home/bobrock/venvs/luks/bin/gunicorn --workers 2 --bind 127.0.0.1:5006 -m 007 wsgi:app --access-logfile '-' --error-logfile '-' --log-level 'debug'
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target

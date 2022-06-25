@@ -14,8 +14,8 @@ sh update_script.sh
 ```
 ### nginx, etc.
 ```bash
-# Install nginx
-sudo apt install nginx
+# Install nginx, gunicorn
+sudo apt install nginx gunicorn
 # Enable ufw
 sudo ufw enable
 # Add HTTP
@@ -24,10 +24,9 @@ sudo ufw allow 'Nginx HTTP' # Also OpenSSH
 sudo systemctl status nginx
 ```
 Now, check that the URL loads: `http://{ip}`
+
 ```bash
-# Install uwsgi
-~/venvs/luks/bin/python3 -m pip install uwsgi
-# Add an app to nginx
+# Add app to nginx
 sudo nano /etc/nginx/sites-available/luks
 # Once done, link to sites-enabled
 sudo ln -s /etc/nginx/sites-available/luks /etc/nginx/sites-enabled
