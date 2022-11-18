@@ -1,14 +1,14 @@
 from flask import (
     Blueprint,
-    redirect,
     Request,
-    request,
     jsonify,
     make_response,
-    render_template
+    redirect,
+    render_template,
+    request,
 )
-from luks.hosts import ServerHosts
 
+from luks.hosts import ServerHosts
 
 hosts = Blueprint('hosts', __name__)
 host_svc = ServerHosts()
@@ -33,16 +33,19 @@ def all_hosts():
     hosts_list = host_svc.all_hosts
     if is_api_request(request):
         return jsonify({'data': hosts_list})
-    return render_template('render_datatable.html',
-                           tbl_id_name='hosts-table',
-                           order_list=[2, "asc"],
-                           header_maps={
-                               'Name': {'col': 'name', 'copyable': True},
-                               'Type': {'col': 'machine_type'},
-                               'IP':  {'col': 'ip', 'copyable': True}
-                           },
-                           reload_endpoint='hosts.reload_hosts',
-                           results_list=hosts_list)
+    return render_template(
+        'render_datatable.html',
+        tbl_id_name='hosts-table',
+        order_list=[2, "asc"],
+        header_maps={
+               'Name': {'col': 'name', 'copyable': True},
+               'Type': {'col': 'machine_type'},
+               'IP':  {'col': 'ip', 'copyable': True}
+           },
+        reload_endpoint='hosts.reload_hosts',
+        results_list=hosts_list,
+        last_update=host_svc.get_hosts_modified_time()
+    )
 
 
 @hosts.route('/api/host', methods=['GET'])
@@ -58,13 +61,16 @@ def get_host():
         hosts_list.append(host_svc.get_host(ip))
     if is_api_request(request):
         return jsonify({'data': hosts_list})
-    return render_template('render_datatable.html',
-                           tbl_id_name='hosts-table',
-                           order_list=[2, 'asc'],
-                           header_maps={
-                               'Name': {'col': 'name', 'copyable': True},
-                               'Type':  {'col': 'machine_type'},
-                               'IP':  {'col': 'ip', 'copyable': True}
-                           },
-                           reload_endpoint='hosts.reload_hosts',
-                           results_list=hosts_list)
+    return render_template(
+        'render_datatable.html',
+        tbl_id_name='hosts-table',
+        order_list=[2, 'asc'],
+        header_maps={
+               'Name': {'col': 'name', 'copyable': True},
+               'Type':  {'col': 'machine_type'},
+               'IP':  {'col': 'ip', 'copyable': True}
+           },
+        reload_endpoint='hosts.reload_hosts',
+        results_list=hosts_list,
+        last_update=host_svc.get_hosts_modified_time()
+    )

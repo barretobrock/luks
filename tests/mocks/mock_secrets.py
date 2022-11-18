@@ -1,12 +1,9 @@
 from datetime import (
     datetime,
-    timedelta
+    timedelta,
 )
 from random import randint
-from typing import (
-    Dict,
-    Union
-)
+from typing import Dict
 
 
 class MockEntry:

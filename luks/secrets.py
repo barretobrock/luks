@@ -1,8 +1,8 @@
 import pathlib
 from typing import Dict
+
 import pykeepass
 from pykeepass.entry import Entry
-
 
 path = pathlib.Path
 KEY_DIR = path.home().joinpath('keys')

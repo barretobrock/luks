@@ -1,8 +1,9 @@
 """Configuration setup"""
 import pathlib
+
 from luks import (
     __update_date__,
-    __version__
+    __version__,
 )
 
 

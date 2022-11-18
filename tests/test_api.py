@@ -1,12 +1,13 @@
 import unittest
 from unittest.mock import (
-    patch,
     mock_open,
-    MagicMock
+    patch,
 )
-from luks.config import TestConfig
-import luks.api as lapi
+
 from loguru import logger
+
+import luks.api as lapi
+from luks.config import TestConfig
 from tests.common import make_patcher
 from tests.mocks.mock_hosts import mock_etc_hosts
 from tests.mocks.mock_secrets import MockEntry

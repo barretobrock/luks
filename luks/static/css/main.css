@@ -10,6 +10,8 @@ h2,
     color: #acacac;
 }
 
+/* nav */
+
 .nav-logo {
     width: 25px;
 }
@@ -24,42 +26,23 @@ footer .container {
     line-height: 60px;
 }
 
+.footer .navbar.fixed-bottom {
+    border-top: 1px double #acacac;
+    background-color: #2e2f35;
+}
+
+.text-muted {
+    color: #958D4A !important;
+}
+
+/* copyable hover */
+
 .copyable {
     transition: background-color 0.1s linear;
 }
 .copyable:hover {
     background-color: rgba(127, 255, 212, 0.63);
     cursor: copy;
-}
-
-/* Keygen Form */
-.form-wrapper h2 {
-    padding-top: 15px;
-    padding-bottom: 5px;
-}
-form.keygen-form {
-    display: grid;
-    grid-template-columns: max-content;
-    grid-gap: 5px;
-}
-.keygen-form fieldset {
-    text-align: right;
-}
-.keygen-form label:after {
-    content: ':';
-}
-.form-field label {
-    color: #797979
-}
-.form-field input {
-    border: 1px solid #c6c6c6 !important;
-    border-radius: 5px;
-}
-#submit {
-    border: none;
-    border-radius: 5px;
-    background-color: #1983cc;
-    color: #e3e3e3;
 }
 
 /* key detail */

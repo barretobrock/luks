@@ -1,9 +1,11 @@
 import unittest
 from unittest.mock import (
+    MagicMock,
     patch,
-    MagicMock
 )
+
 from loguru import logger
+
 from luks.secrets import Secrets
 
 

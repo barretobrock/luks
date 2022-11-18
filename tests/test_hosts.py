@@ -1,14 +1,17 @@
 import unittest
 from unittest.mock import (
+    mock_open,
     patch,
-    mock_open
 )
+
 from loguru import logger
+
 from luks.hosts import (
-    ServerHosts,
     HostnameNotFoundException,
-    IPAddressNotFoundException
+    IPAddressNotFoundException,
+    ServerHosts,
 )
+
 from .mocks.mock_hosts import mock_etc_hosts
 
 

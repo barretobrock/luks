@@ -61,10 +61,16 @@
         <!-- Here's where the main content gets piped in! -->
         {% block content %} {% endblock %}
     </div>
-  </body>
-  <footer class="footer">
-      <div class="navbar fixed-bottom">
-          <span class="text-muted">Something here?</span>
-      </div>
-  </footer>
+    </body>
+    <footer class="footer">
+        <div class="navbar fixed-bottom">
+            <span class="text-muted">
+                {% if self.footer() | trim %}
+                    {% block footer %} {% endblock %}
+                {% else %}
+                    Luksy
+                {% endif %}
+            </span>
+        </div>
+    </footer>
 </html>

@@ -1,7 +1,9 @@
 import pathlib
+
 from pukr import get_logger
-from luks.config import ProductionConfig
+
 from luks.api import create_app
+from luks.config import ProductionConfig
 
 app = create_app(config_class=ProductionConfig)
 

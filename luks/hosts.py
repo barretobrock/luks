@@ -1,8 +1,10 @@
-import re
+from datetime import datetime
 import enum
+import os.path
+import re
 from typing import (
+    Dict,
     List,
-    Dict
 )
 
 
@@ -51,6 +53,10 @@ class ServerHosts:
             return MachineType.server
         else:
             return MachineType.other
+
+    @staticmethod
+    def get_hosts_modified_time() -> datetime:
+        return datetime.fromtimestamp(os.path.getmtime('/etc/hosts'))
 
     def read_hosts(self):
         """Reads in /etc/hosts, parses data"""

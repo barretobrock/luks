@@ -1,12 +1,12 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. 
+All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 _Note: 'Unreleased' section below is used for untagged changes that will be issued with the next version bump_
 
-### [Unreleased] - 2022-00-00 
+### [Unreleased] - 2022-00-00
 #### Added
 #### Changed
 #### Deprecated
@@ -14,7 +14,18 @@ _Note: 'Unreleased' section below is used for untagged changes that will be issu
 #### Fixed
 #### Security
 __BEGIN-CHANGELOG__
- 
+
+### [0.4.0] - 2022-11-18
+#### Added
+ - Date `/etc/hosts` file last changed as footer
+ - `pre-commit` support
+ - Makefile
+#### Changed
+ - New logo
+ - Adjusted defaults for keygen
+ - Code run through linters
+ - Minor CSS tweaks
+
 ### [0.3.1] - 2022-06-24
 #### Added
  - Darkmode style
@@ -23,7 +34,7 @@ __BEGIN-CHANGELOG__
  - Shared methods for table rendering / copying data
 #### Removed
  - Individual table templates
- 
+
 ### [0.3.0] - 2022-04-29
 #### Added
  - CHANGELOG
