@@ -5,8 +5,9 @@ body {
 }
 
 h2,
+body,
 .table-wrapper label,
-.table-wrapper div[role="status"]{
+.table-wrapper div[role="status"] {
     color: #acacac;
 }
 

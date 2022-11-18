@@ -15,6 +15,11 @@ _Note: 'Unreleased' section below is used for untagged changes that will be issu
 #### Security
 __BEGIN-CHANGELOG__
 
+### [0.4.1] - 2022-11-18
+#### Changed
+ - path to hosts file
+ - minor CSS tweaks
+
 ### [0.4.0] - 2022-11-18
 #### Added
  - Date `/etc/hosts` file last changed as footer

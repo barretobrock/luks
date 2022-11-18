@@ -1,6 +1,7 @@
 from datetime import datetime
 import enum
-import os.path
+import os
+from pathlib import Path
 import re
 from typing import (
     Dict,
@@ -29,7 +30,10 @@ class MachineType(enum.Enum):
 
 class ServerHosts:
     """Everything associated with the Hosts API"""
+    DATA_DIR = Path().home().joinpath('data')
+
     def __init__(self):
+        self.hosts_path = self.DATA_DIR.joinpath('hosts')
         self.all_hosts = []
         # Populate the hosts list for the first time
         self.read_hosts()
@@ -54,13 +58,12 @@ class ServerHosts:
         else:
             return MachineType.other
 
-    @staticmethod
-    def get_hosts_modified_time() -> datetime:
-        return datetime.fromtimestamp(os.path.getmtime('/etc/hosts'))
+    def get_hosts_modified_time(self) -> datetime:
+        return datetime.fromtimestamp(os.path.getmtime(self.hosts_path))
 
     def read_hosts(self):
-        """Reads in /etc/hosts, parses data"""
-        with open('/etc/hosts', 'r') as f:
+        """Reads in /data/hosts, parses data"""
+        with self.hosts_path.open('r') as f:
             hostlines = f.readlines()
         hostlines = [re.split(r'\s+', line.strip()) for line in hostlines if line.startswith('192.168')]
         hosts = []
