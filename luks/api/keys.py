@@ -128,4 +128,10 @@ def generate_keys():
     else:
         # Render form to filter results
         form = KeyGenForm()
+        if len(request.args) > 0:
+            # If URL params were added to the request, bypass form generation and go straight to POST
+            #   render results
+            form.n_phrases.data = int(request.args.get('phrz', 10))
+            form.n_words.data = int(request.args.get('wrds', 6))
+            form.char_limit.data = int(request.args.get('charlim', 32))
         return render_template('keygen.html', form=form, template='form-template')
