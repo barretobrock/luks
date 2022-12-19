@@ -15,6 +15,11 @@ _Note: 'Unreleased' section below is used for untagged changes that will be issu
 #### Security
 __BEGIN-CHANGELOG__
 
+### [0.4.2] - 2022-12-19
+#### Changed
+ - keygen endpoint now accepts url params
+ - updated requirements
+
 ### [0.4.1] - 2022-11-18
 #### Changed
  - path to hosts file
