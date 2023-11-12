@@ -14,7 +14,6 @@ bump-major: check-ppm-path
 	sh "${PPM_ABS_PATH}" -d --cmd bump --level major --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
 pull: check-ppm-path
 	sh "${PPM_ABS_PATH}" -d --cmd pull --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
-	sh ppmgr.sh pull
 push: check-ppm-path
 	sh "${PPM_ABS_PATH}" -d --cmd push --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
 debug-run:
