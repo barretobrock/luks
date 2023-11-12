@@ -4,6 +4,7 @@ from luks.api.hosts import hosts
 from luks.api.keys import keys
 from luks.api.main import main
 from luks.config import ProductionConfig
+from luks.hosts import ServerHosts
 
 
 def create_app(*args, **kwargs) -> Flask:
@@ -16,5 +17,7 @@ def create_app(*args, **kwargs) -> Flask:
     # Register routes
     for rt in [hosts, keys, main]:
         app.register_blueprint(rt)
+
+    app.config['svr_host_obj'] = ServerHosts()
 
     return app

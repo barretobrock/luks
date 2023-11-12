@@ -19,13 +19,16 @@ class TestAPI(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.log = logger
-        with patch('builtins.open', mock_open(read_data=mock_etc_hosts)):
+        # with patch('pathlib.Path.open', mock_open(read_data=mock_etc_hosts))
+        with patch('pathlib.Path.open', mock_open(read_data=mock_etc_hosts)):
             app = lapi.create_app(config_class=TestConfig)
             cls.app = app.test_client()
 
     def setUp(self) -> None:
         mock1 = MockEntry('test_entry', 'user', 'password123!', {'my_attr': 'lol'})
         self.mock_secrets = make_patcher(self, 'luks.api.keys.Secrets')()
+        self.mock_get_secrets = make_patcher(self, 'luks.api.keys.get_secrets')
+        self.mock_get_secrets.return_value = self.mock_secrets
         self.mock_secrets.db.entries = [
             mock1
         ]

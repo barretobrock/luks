@@ -1,14 +1,22 @@
+PROJECT		:= luks
+PY_LIB_NAME := luks
+VENV_NAME	:= luks
+MAIN_BRANCH := main
 
-bump-patch:
-	sh ppmgr.sh bump
-bump-minor:
-	sh ppmgr.sh bump minor
-bump-major:
-	sh ppmgr.sh bump major
-pull:
+
+check-ppm-path:
+	@[  "${PPM_ABS_PATH}" ] && echo "PPM path set: ${PPM_ABS_PATH}" || (echo "PPM path not set" && exit 1)
+bump-patch: check-ppm-path
+	sh "${PPM_ABS_PATH}" -d --cmd bump --level patch --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
+bump-minor: check-ppm-path
+	sh "${PPM_ABS_PATH}" -d --cmd bump --level minor --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
+bump-major: check-ppm-path
+	sh "${PPM_ABS_PATH}" -d --cmd bump --level major --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
+pull: check-ppm-path
+	sh "${PPM_ABS_PATH}" -d --cmd pull --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
 	sh ppmgr.sh pull
-push:
-	sh ppmgr.sh push
+push: check-ppm-path
+	sh "${PPM_ABS_PATH}" -d --cmd push --project $(PROJECT) --lib $(PY_LIB_NAME) --venv $(VENV_NAME) --main-branch $(MAIN_BRANCH)
 debug-run:
 	python3 run_debug.py
 check:
@@ -23,4 +31,4 @@ update:
 test:
 	tox
 rebuild-test:
-	tox --recreate -e py310
+	tox --recreate -e py311

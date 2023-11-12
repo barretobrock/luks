@@ -1,6 +1,7 @@
 from flask import (
     Blueprint,
     Request,
+    current_app,
     jsonify,
     make_response,
     redirect,
@@ -8,10 +9,11 @@ from flask import (
     request,
 )
 
-from luks.hosts import ServerHosts
-
 hosts = Blueprint('hosts', __name__)
-host_svc = ServerHosts()
+
+
+def get_svr_host():
+    return current_app.config.get('svr_host_obj')
 
 
 def is_api_request(req: Request) -> bool:
@@ -21,7 +23,7 @@ def is_api_request(req: Request) -> bool:
 @hosts.route('/api/hosts/reload', methods=['GET'])
 @hosts.route('/hosts/reload', methods=['GET'])
 def reload_hosts():
-    host_svc.reload()
+    get_svr_host().reload()
     if is_api_request(request):
         return make_response('', 200)
     return redirect('/hosts')
@@ -30,7 +32,7 @@ def reload_hosts():
 @hosts.route('/api/hosts', methods=['GET'])
 @hosts.route('/hosts', methods=['GET'])
 def all_hosts():
-    hosts_list = host_svc.all_hosts
+    hosts_list = get_svr_host().all_hosts
     if is_api_request(request):
         return jsonify({'data': hosts_list})
     return render_template(
@@ -44,7 +46,7 @@ def all_hosts():
            },
         reload_endpoint='hosts.reload_hosts',
         results_list=hosts_list,
-        last_update=host_svc.get_hosts_modified_time()
+        last_update=get_svr_host().get_hosts_modified_time()
     )
 
 
@@ -56,9 +58,9 @@ def get_host():
     ip = request.args.get('ip', default=None, type=str)
     hosts_list = []
     if host_name is not None:
-        hosts_list.append(host_svc.get_ip(host_name))
+        hosts_list.append(get_svr_host().get_ip(host_name))
     elif ip is not None:
-        hosts_list.append(host_svc.get_host(ip))
+        hosts_list.append(get_svr_host().get_host(ip))
     if is_api_request(request):
         return jsonify({'data': hosts_list})
     return render_template(
@@ -72,5 +74,5 @@ def get_host():
            },
         reload_endpoint='hosts.reload_hosts',
         results_list=hosts_list,
-        last_update=host_svc.get_hosts_modified_time()
+        last_update=get_svr_host().get_hosts_modified_time()
     )
