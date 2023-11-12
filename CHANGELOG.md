@@ -15,6 +15,14 @@ _Note: 'Unreleased' section below is used for untagged changes that will be issu
 #### Security
 __BEGIN-CHANGELOG__
 
+### [0.5.0] - 2023-11-12
+#### Added
+ - Py 3.11 support lol
+#### Changed
+ - Bumped tox and other test support tools by a major version. Updated related config files to support new versions.
+#### Fixed
+ - Tests were breaking due to messy handling of objects in a Flask environment. I'll be honest; no clue if these fixes are ideal, but they seem to take the Flask paradigm into account a bit better than the earlier routine.
+
 ### [0.4.2] - 2022-12-19
 #### Changed
  - keygen endpoint now accepts url params
